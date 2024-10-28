@@ -160,7 +160,7 @@ net z-neg-limit     =>  joint.1.neg-lim-sw-in
 #*******************
 #  SPINDLE
 #*******************
-
+# Change spindle setting
 setp   pid.s.Pgain     [SPINDLE_0]P
 setp   pid.s.Igain     [SPINDLE_0]I
 setp   pid.s.Dgain     [SPINDLE_0]D

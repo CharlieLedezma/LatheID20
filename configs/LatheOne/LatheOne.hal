@@ -2,7 +2,7 @@
 # Using LinuxCNC version:  Master (2.9)
 # If you make changes to this file, they will be
 # overwritten when you run PNCconf again
-
+# Comments Testing
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadrt hostmot2

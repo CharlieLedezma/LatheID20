@@ -171,6 +171,7 @@ setp   pid.s.FF2       [SPINDLE_0]FF2
 setp   pid.s.deadband  [SPINDLE_0]DEADBAND
 setp   pid.s.maxoutput [SPINDLE_0]MAX_OUTPUT
 setp   pid.s.error-previous-target true
+
 # This setting is to limit bogus stepgen
 # velocity corrections caused by position
 # feedback sample time jitter.
@@ -182,20 +183,38 @@ net spindle-vel-cmd-rpm     => pid.s.command
 net spindle-vel-fb-rpm      => pid.s.feedback
 net spindle-output        <=  pid.s.output
 
+# ---digital potentionmeter output signals/setup---
+#  hm2_7i92.0.7i76.0.0.input-06
+#  hm2_7i92.0.7i76.0.0.output-01
+
+setp   hm2_7i92.0.7i76.0.0.spinout-minlim    [SPINDLE_0]OUTPUT_MIN_LIMIT
+setp   hm2_7i92.0.7i76.0.0.spinout-maxlim    [SPINDLE_0]OUTPUT_MAX_LIMIT
+setp   hm2_7i92.0.7i76.0.0.spinout-scalemax  [SPINDLE_0]OUTPUT_SCALE
+
+net spindle-output      => hm2_7i92.0.7i76.0.0.spinout
+net spindle-enable      => hm2_7i92.0.7i76.0.0.spinena
+net spindle-ccw         => hm2_7i92.0.7i76.0.0.spindir
+
+# ---set the spindle scaling---
+#setp hm2_7i92.0.7i76.0.0.spinout-maxlim 4000
+#setp hm2_7i92.0.7i76.0.0.spinout-scalemax 4000
+
+
 # Step Gen signals/setup
 
-setp   hm2_7i92.0.stepgen.02.dirsetup        [SPINDLE_0]DIRSETUP
-setp   hm2_7i92.0.stepgen.02.dirhold         [SPINDLE_0]DIRHOLD
-setp   hm2_7i92.0.stepgen.02.steplen         [SPINDLE_0]STEPLEN
-setp   hm2_7i92.0.stepgen.02.stepspace       [SPINDLE_0]STEPSPACE
-setp   hm2_7i92.0.stepgen.02.position-scale  [SPINDLE_0]STEP_SCALE
-setp   hm2_7i92.0.stepgen.02.step_type        0
-setp   hm2_7i92.0.stepgen.02.control-type     1
-setp   hm2_7i92.0.stepgen.02.maxaccel         [SPINDLE_0]STEPGEN_MAXACCEL
-setp   hm2_7i92.0.stepgen.02.maxvel           [SPINDLE_0]STEPGEN_MAXVEL
+#setp   hm2_7i92.0.stepgen.02.dirsetup        [SPINDLE_0]DIRSETUP
+#setp   hm2_7i92.0.stepgen.02.dirhold         [SPINDLE_0]DIRHOLD
+#setp   hm2_7i92.0.stepgen.02.steplen         [SPINDLE_0]STEPLEN
+#setp   hm2_7i92.0.stepgen.02.stepspace       [SPINDLE_0]STEPSPACE
+#setp   hm2_7i92.0.stepgen.02.position-scale  [SPINDLE_0]STEP_SCALE
+#setp   hm2_7i92.0.stepgen.02.step_type        0
+#setp   hm2_7i92.0.stepgen.02.control-type     1
+#setp   hm2_7i92.0.stepgen.02.maxaccel         [SPINDLE_0]STEPGEN_MAXACCEL
+#setp   hm2_7i92.0.stepgen.02.maxvel           [SPINDLE_0]STEPGEN_MAXVEL
 
-net machine-is-on           =>  hm2_7i92.0.stepgen.02.enable
-net spindle-vel-cmd-rps     =>  hm2_7i92.0.stepgen.02.velocity-cmd
+#net machine-is-on           =>  hm2_7i92.0.stepgen.02.enable
+#net spindle-vel-cmd-rps     =>  hm2_7i92.0.stepgen.02.velocity-cmd
+
 # ---Encoder feedback signals/setup---
 
 setp    hm2_7i92.0.encoder.00.counter-mode 0

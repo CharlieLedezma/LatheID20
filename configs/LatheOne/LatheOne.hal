@@ -183,21 +183,17 @@ net spindle-vel-cmd-rpm     => pid.s.command
 net spindle-vel-fb-rpm      => pid.s.feedback
 net spindle-output        <=  pid.s.output
 
-# ---digital potentionmeter output signals/setup---
-#  hm2_7i92.0.7i76.0.0.input-06
-#  hm2_7i92.0.7i76.0.0.output-01
 
 setp   hm2_7i92.0.7i76.0.0.spinout-minlim    [SPINDLE_0]OUTPUT_MIN_LIMIT
 setp   hm2_7i92.0.7i76.0.0.spinout-maxlim    [SPINDLE_0]OUTPUT_MAX_LIMIT
 setp   hm2_7i92.0.7i76.0.0.spinout-scalemax  [SPINDLE_0]OUTPUT_SCALE
+#setp   hm2_7i92.0.7i76.0.0.spinena-invert    true
+#setp   hm2_7i92.0.7i76.0.0.spindir-invert    true
 
-net spindle-output      => hm2_7i92.0.7i76.0.0.spinout
+net spindle-vel-cmd-rpm-abs => hm2_7i92.0.7i76.0.0.spinout
+#net spindle-output      => hm2_7i92.0.7i76.0.0.spinout
 net spindle-enable      => hm2_7i92.0.7i76.0.0.spinena
 net spindle-ccw         => hm2_7i92.0.7i76.0.0.spindir
-
-# ---set the spindle scaling---
-#setp hm2_7i92.0.7i76.0.0.spinout-maxlim 4000
-#setp hm2_7i92.0.7i76.0.0.spinout-scalemax 4000
 
 
 # Step Gen signals/setup
@@ -235,6 +231,7 @@ net spindle-vel-cmd-rps        <=  spindle.0.speed-out-rps
 net spindle-vel-cmd-rps-abs    <=  spindle.0.speed-out-rps-abs
 net spindle-vel-cmd-rpm        <=  spindle.0.speed-out
 net spindle-vel-cmd-rpm-abs    <=  spindle.0.speed-out-abs
+#net spindle-vel-cmd-rpm-abs    <=  spindle.0.speed-out-abs => hm2_7i92.0.7i76.0.0.spinout
 net spindle-enable             <=  spindle.0.on
 net spindle-cw                 <=  spindle.0.forward
 net spindle-ccw                <=  spindle.0.reverse

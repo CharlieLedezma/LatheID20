@@ -1,0 +1,22 @@
+
+
+
+
+
+mesaflash --device 7i92t --addr 10.10.10.10 --sserial
+mesaflash --device 7i92t --addr 10.10.10.10 --readhmid
+mesaflash --device 7i92t --addr 10.10.10.10 --rpo 0x1000
+sudo mesaflash --device 7i92t --reload
+
+
+
+
+mesaflash --device 7i92 --addr 10.10.10.10 --readhmid --dbname1 7I76
+mesaflash --device 7i92 --addr 10.10.10.10 --readhmid --dbname2 7I76
+
+
+
+halcmd show all | grep 7i76
+
+mesaflash --device MESA7I92~ --verbose
+mesaflash --device 7i92 --verbose
